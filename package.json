@@ -4,13 +4,16 @@
   "description": "",
   "main": "./src/index.js",
   "scripts": {
-    "dev":"nodemon ."
+    "dev": "nodemon .",
+    "db:reset": "node ./src/queries/resetdb.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hokify/agenda": "^6.3.0",
     "dotenv": "^16.4.5",
+    "mongoose": "^8.2.1",
     "node-telegram-bot-api": "^0.64.0",
     "nodemon": "^3.1.0"
   }
