@@ -185,8 +185,8 @@ async function sendStartMessage(update) {
     },
   ]);
 
-  const chatId = update.chat.id;
   try {
+    const chatId = update.chat.id;
     await bot.sendVideo(chatId, "./src/assets/videos/intro-message.mp4");
     await bot.sendMessage(chatId, message, {
       reply_markup: keyboard,
@@ -447,14 +447,18 @@ async function sendScheduledEverydayMessage(allPendingUsers, response) {
 }
 
 bot.on("callback_query", async (query) => {
-  const chatId = query.message.chat.id;
-  const userId = query.from.id;
-  const option = query.data;
+  try {
+    const chatId = query.message.chat.id;
+    const userId = query.from.id;
+    const option = query.data;
 
-  // Handle the user's response
-  if (option === "win") {
-    const reply = congrats(query.from.first_name);
-    bot.sendMessage(chatId, reply, { parse_mode: "Markdown" });
-    await User.updateOne({ telegramId: userId }, { status: "done" });
+    // Handle the user's response
+    if (option === "win") {
+      const reply = congrats(query.from.first_name);
+      bot.sendMessage(chatId, reply, { parse_mode: "Markdown" });
+      await User.updateOne({ telegramId: userId }, { status: "done" });
+    }
+  } catch (error) {
+    console.error(error);
   }
 });
