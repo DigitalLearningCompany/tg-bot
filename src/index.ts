@@ -199,7 +199,7 @@ async function sendStartMessage(update) {
   const chatId = update.chat.id;
   await bot.api.sendVideo(
     chatId,
-    "BAACAgEAAxkDAAIFUGX09vSAtQIJ_lkW7GA1t9wC3Aj-AAJbAwACXGmpR03tdggiJXlMNAQ"
+    new InputFile("./src/assets/videos/intro-message.mp4")
   );
 
   await bot.api.sendMessage(chatId, message.text, {
