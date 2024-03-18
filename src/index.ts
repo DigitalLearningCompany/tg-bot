@@ -368,7 +368,7 @@ async function sendScheduledEverydayMessage(allPendingUsers, response) {
         )
         .row()
         .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-      parse_mode: "Markdown",
+      entities: response.entities,
     });
   });
 }
@@ -383,7 +383,6 @@ user.on("callback_query", async (query) => {
     if (option === "win") {
       const reply = congrats(query.from.first_name);
       await bot.api.sendMessage(chatId, reply.text, {
-        parse_mode: "Markdown",
         entities: reply.entities,
       });
       await User.updateOne({ telegramId: userId }, { status: "done" });
