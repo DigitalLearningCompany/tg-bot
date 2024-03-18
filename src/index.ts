@@ -360,7 +360,7 @@ async function sendTenthMessage(telegramId, telegramFirstName) {
 
 async function sendScheduledEverydayMessage(allPendingUsers, response) {
   allPendingUsers.forEach((user) => {
-    bot.api.sendMessage(user?.telegramId, response, {
+    bot.api.sendMessage(user?.telegramId, response.text, {
       reply_markup: new InlineKeyboard()
         .url(
           "Quero participar da live AGORA!",
