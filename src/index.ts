@@ -197,11 +197,10 @@ async function sendStartMessage(update) {
   const message = introMessage(update.from.first_name);
 
   const chatId = update.chat.id;
-  const vid = await bot.api.sendVideo(
+  await bot.api.sendVideo(
     chatId,
-    new InputFile("./src/assets/videos/intro-message.mp4")
+    'BAACAgEAAxkDAAJnt2X39KFApELSm2PgQhCLjyJ-8UayAAJQAwACtWbAR1vGYEX5S1CuNAQ'
   );
-  console.log(vid)
 
   await bot.api.sendMessage(chatId, message.text, {
     reply_markup: new InlineKeyboard().url(
