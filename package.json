@@ -2,19 +2,21 @@
   "name": "ds_test_bot",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "dev": "nodemon .",
-    "db:reset": "node ./src/queries/resetdb.js"
+    "start": "node ./dist/index.js",
+    "dev": "nodemon ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@grammyjs/parse-mode": "^1.9.0",
     "@hokify/agenda": "^6.3.0",
     "dotenv": "^16.4.5",
+    "grammy": "^1.21.1",
     "mongoose": "^8.2.1",
-    "node-telegram-bot-api": "^0.64.0",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "typescript": "5.4.2"
   }
 }
