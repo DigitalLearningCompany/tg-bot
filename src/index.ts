@@ -359,7 +359,7 @@ async function sendTenthMessage(telegramId, telegramFirstName) {
 }
 
 async function sendScheduledEverydayMessage(allPendingUsers, response) {
-  allPendingUsers.forEach((user) => {
+  await allPendingUsers.forEach((user) => {
     bot.api.sendMessage(user?.telegramId, response.text, {
       reply_markup: new InlineKeyboard()
         .url(
