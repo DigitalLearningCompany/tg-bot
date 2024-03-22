@@ -359,18 +359,22 @@ async function sendTenthMessage(telegramId, telegramFirstName) {
 }
 
 async function sendScheduledEverydayMessage(allPendingUsers, response) {
-  await allPendingUsers.forEach((user) =>
-    bot.api.sendMessage(user?.telegramId, response.text, {
-      reply_markup: new InlineKeyboard()
-        .url(
-          "Quero participar da live AGORA!",
-          "https://t.me/+aQSAAQ05iUplNjNh"
-        )
-        .row()
-        .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-      entities: response.entities,
-    })
-  );
+  for (const user of allPendingUsers) {
+    try {
+      await bot.api.sendMessage(user?.telegramId, response?.text, {
+        reply_markup: new InlineKeyboard()
+          .url(
+            "Quero participar da live AGORA!",
+            "https://t.me/+aQSAAQ05iUplNjNh"
+          )
+          .row()
+          .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+        entities: response.entities,
+      });
+    } catch (error) {
+      console.error("Everyday Scheduled Message Error", error.message);
+    }
+  }
 }
 
 user.on("callback_query", async (query) => {
