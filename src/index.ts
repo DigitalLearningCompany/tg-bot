@@ -359,7 +359,7 @@ async function sendTenthMessage(telegramId, telegramFirstName) {
 }
 
 async function sendScheduledEverydayMessage(allPendingUsers, response) {
-  await allPendingUsers.forEach((user) => {
+  await allPendingUsers.forEach((user) =>
     bot.api.sendMessage(user?.telegramId, response.text, {
       reply_markup: new InlineKeyboard()
         .url(
@@ -369,8 +369,8 @@ async function sendScheduledEverydayMessage(allPendingUsers, response) {
         .row()
         .text("Eu JÁ FIZ o passo a passo todo!", "win"),
       entities: response.entities,
-    });
-  });
+    })
+  );
 }
 
 user.on("callback_query", async (query) => {
