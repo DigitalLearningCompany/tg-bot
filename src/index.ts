@@ -27,6 +27,7 @@ import congrats from "./responses/congratulations";
 
 const MONGO_URI = process.env.MONGO_URI;
 const TOKEN = process.env.BOT_TOKEN;
+const BLOCKED_ERROR = "Error Call to 'sendMessage' failed! (403: Forbidden: bot was blocked by the user)";
 
 if (!TOKEN || !MONGO_URI) {
   console.error("Missing environment variables");
