@@ -373,7 +373,7 @@ async function sendScheduledEverydayMessage(allPendingUsers, response) {
       });
     } catch (error) {
       // checks for 403 errors in case user blocked the bot or deleted telegram account
-      if (error.message.includes('403') {
+      if (error.message.includes('403')) {
         await User.updateOne(
           { telegramId: user?.telegramId },
           { status: "blocked" }
