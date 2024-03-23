@@ -372,7 +372,14 @@ async function sendScheduledEverydayMessage(allPendingUsers, response) {
         entities: response.entities,
       });
     } catch (error) {
-      console.error("Everyday Scheduled Message Error", error.message);
+      if (error.message === BLOCKED_ERROR) {
+        await User.updateOne(
+          { telegramId: user?.telegramId },
+          { status: "blocked" }
+        );
+      } else {
+        console.error("Everyday Message Error ", error.message);
+      }
     }
   }
 }
