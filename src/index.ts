@@ -42,12 +42,14 @@ agenda.define("Send Message Monday to Saturday", async (job) => {
   const { message } = job.attrs.data;
   const users = await User.find({ status: "pending" });
   await sendScheduledEverydayMessage(users, message);
+  await job.touch();
 });
 
 agenda.define("Send Message Sunday Only", async (job) => {
   const { message } = job.attrs.data;
   const users = await User.find({ status: "pending" });
   await sendScheduledEverydayMessage(users, message);
+  await job.touch();
 });
 
 agenda.define("Send Second Message", async (job) => {
