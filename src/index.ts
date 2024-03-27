@@ -41,15 +41,13 @@ bot.use(hydrateReply);
 agenda.define("Send Message Monday to Saturday", async (job) => {
   const { message } = job.attrs.data;
   const users = await User.find({ status: "pending" });
-  await sendScheduledEverydayMessage(users, message);
-  await job.touch();
+  await sendScheduledEverydayMessage(users, message, job);
 });
 
 agenda.define("Send Message Sunday Only", async (job) => {
   const { message } = job.attrs.data;
   const users = await User.find({ status: "pending" });
-  await sendScheduledEverydayMessage(users, message);
-  await job.touch();
+  await sendScheduledEverydayMessage(users, message, job);
 });
 
 agenda.define("Send Second Message", async (job) => {
@@ -360,9 +358,10 @@ async function sendTenthMessage(telegramId, telegramFirstName) {
   });
 }
 
-async function sendScheduledEverydayMessage(allPendingUsers, response) {
+async function sendScheduledEverydayMessage(allPendingUsers, response, job) {
   for (const user of allPendingUsers) {
     try {
+      await job.touch();
       await bot.api.sendMessage(user?.telegramId, response?.text, {
         reply_markup: new InlineKeyboard()
           .url(
