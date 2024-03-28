@@ -114,7 +114,7 @@ agenda.define("Send Tenth Message", async (job) => {
 });
 
 agenda.every(
-  "0 9,14,20 * * 1-6",
+  "55 8,13,19 * * 1-6",
   "Send Message Monday to Saturday",
   {
     message: fixedTimeMessage,
@@ -125,7 +125,7 @@ agenda.every(
 );
 
 agenda.every(
-  "0 12,16,22 * * 0",
+  "55 11,13,21 * * 0",
   "Send Message Sunday Only",
   {
     message: fixedTimeMessage,
