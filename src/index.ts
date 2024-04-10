@@ -194,7 +194,7 @@ user.command("start", async (update) => {
 });
 
 user.on("msg:video", async (update) => {
-  console.log(update.message.video);
+  console.log(update.message.video.file_id);
 });
 
 async function sendStartMessage(update) {
