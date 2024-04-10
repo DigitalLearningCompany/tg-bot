@@ -193,17 +193,13 @@ user.command("start", async (update) => {
   });
 });
 
-user.on("msg:video", async (update) => {
-  console.log(update.message.video.file_id);
-});
-
 async function sendStartMessage(update) {
   const message = introMessage(update.from.first_name);
 
   const chatId = update.chat.id;
   await bot.api.sendVideo(
     chatId,
-    'BAACAgEAAxkDAAJnt2X39KFApELSm2PgQhCLjyJ-8UayAAJQAwACtWbAR1vGYEX5S1CuNAQ'
+    'BAACAgEAAxkBAAEENFVmFhnIzJXwDEhEC2BP5S8k_ARO5QACMgQAAsyZsUR0piNsi6-oJjQE'
   );
 
   await bot.api.sendMessage(chatId, message.text, {
