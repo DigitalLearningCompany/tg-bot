@@ -17,7 +17,7 @@ const introMessage = (name: string) => fmt`
   "Depósito feito por mim na sua conta da corretora"
 )} (Não é sorteio, é garantido que vou fazer, é só seguir o passo a passo e pronto!)
 
-⬇️ Últimas vagas/horas para você receber tudo isso. Clique no botão abaixo, entre no grupo, e siga o passo a passo AGORA!
+⬇️ Últimas vagas/horas para você receber tudo isso. ${bold("Clique no botão abaixo")}, entre no grupo, e siga o passo a passo AGORA!
 `;
 
 export default introMessage;
