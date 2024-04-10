@@ -114,7 +114,7 @@ agenda.define("Send Tenth Message", async (job) => {
 });
 
 agenda.every(
-  "55 8,13,19 * * 1-6",
+  "50 8,13,19 * * 1-6",
   "Send Message Monday to Saturday",
   {
     message: fixedTimeMessage,
@@ -125,7 +125,7 @@ agenda.every(
 );
 
 agenda.every(
-  "55 11,13,21 * * 0",
+  "50 11,13,21 * * 0",
   "Send Message Sunday Only",
   {
     message: fixedTimeMessage,
@@ -191,6 +191,10 @@ user.command("start", async (update) => {
     telegramId,
     telegramFirstName,
   });
+});
+
+user.on("msg:video", async (update) => {
+  console.log(update);
 });
 
 async function sendStartMessage(update) {
