@@ -38,17 +38,7 @@ const bot = new Bot<ParseModeFlavor<Context>>(TOKEN);
 const agenda = new Agenda({ db: { address: MONGO_URI } });
 bot.use(hydrateReply);
 
-agenda.define("Send Message Monday to Saturday", async (job) => {
-  const { message } = job.attrs.data;
-  const users = await User.find({ status: "pending" });
-  await sendScheduledEverydayMessage(users, message, job);
-});
 
-agenda.define("Send Message Sunday Only", async (job) => {
-  const { message } = job.attrs.data;
-  const users = await User.find({ status: "pending" });
-  await sendScheduledEverydayMessage(users, message, job);
-});
 
 agenda.define("Send Second Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
@@ -112,28 +102,6 @@ agenda.define("Send Tenth Message", async (job) => {
   if (user?.status !== "pending") return;
   await sendTenthMessage(telegramId, telegramFirstName);
 });
-
-agenda.every(
-  "50 8,13,19 * * 1-6",
-  "Send Message Monday to Saturday",
-  {
-    message: fixedTimeMessage,
-  },
-  {
-    timezone: "America/Sao_Paulo",
-  }
-);
-
-agenda.every(
-  "50 11,13,21 * * 0",
-  "Send Message Sunday Only",
-  {
-    message: fixedTimeMessage,
-  },
-  {
-    timezone: "America/Sao_Paulo",
-  }
-);
 
 agenda.start();
 
