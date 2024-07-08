@@ -1,7 +1,7 @@
 import { bold, fmt } from "@grammyjs/parse-mode";
 
 const introMessage = (name: string) => fmt`
-🏆 ${name}, PARABÉNS, você conseguiu! Leia com atenção: 
+🏆 ${name}, PARABÉNS, você conseguiu! ${bold("Leia com atenção:")} 
 
 ✅ ${bold("Você já está na fila de espera para a sua alavancagem privada")}, assim que chegar a sua vez, eu vou te chamar no privado, não será esse robô, EU mesmo te chamarei no privado aqui do Telegram, esse robô serve apenas para ir te avisando em que lugar da fila de espera você está. (É rápido) 
 
