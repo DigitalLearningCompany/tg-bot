@@ -1,15 +1,9 @@
 import { bold, fmt } from "@grammyjs/parse-mode";
 
-const secondMessage = (name: string) => fmt`
-👋🏻 ${name} , tô de voltaaaaa. Quero saber se deu tudo certo… Eu me preocupo com você… Mas antes de me dizer… 
+const secondMessage = (name: string, position: int) => fmt`
+📲 ${name}, ${bold("sua posição na fila de espera: ")}${position} 
 
-💰${bold(
-    "Veja o depoimento acima"
-)}, o Pedrão já recebeu tudo aquilo que te falei que iria te entregar e ainda eu já fiz um depósito bem “gordo” na conta dele. O que você acha de ser o próximo? 
-
-🥂Entre no grupo logo e muito em breve será você brindando comigo. ${bold(
-    "Clique no botão abaixo para fazer o passo a passo!"
-)}
+⚠️ ${bold("Atenção:")} Continue aquecendo a sua conta sozinho e também participando das lives ao vivo do grupo VIP, quanto mais aquecida estiver sua conta, maior será a multiplicação do seu dinheiro na sua alavancagem privada. (Caso sua conta não esteja aquecida, você voltará para o final da fila)
 `;
 
 export default secondMessage;

@@ -41,65 +41,65 @@ bot.use(hydrateReply);
 
 
 agenda.define("Send Second Message", async (job) => {
-  const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
-  await sendSecondMessage(telegramId, telegramFirstName);
+  const { telegramId, telegramFirstName, queuePosition } = job.attrs.data;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
+  await sendSecondMessage(telegramId, telegramFirstName, queuePosition);
 });
 
 agenda.define("Send Third Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
   await sendThirdMessage(telegramId, telegramFirstName);
 });
 
 agenda.define("Send Fourth Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
   await sendFourthMessage(telegramId, telegramFirstName);
 });
 
 agenda.define("Send Fifth Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
   await sendFithMessage(telegramId, telegramFirstName);
 });
 
 agenda.define("Send Sixth Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
   await sendSixthMessage(telegramId, telegramFirstName);
 });
 
 agenda.define("Send Seventh Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
   await sendSeventhMessage(telegramId, telegramFirstName);
 });
 
 agenda.define("Send Eighth Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
   await sendEighthMessage(telegramId, telegramFirstName);
 });
 
 agenda.define("Send Nineth Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
   await sendNinethMessage(telegramId, telegramFirstName);
 });
 
 agenda.define("Send Tenth Message", async (job) => {
   const { telegramId, telegramFirstName } = job.attrs.data;
-  const user = await User.findOne({ telegramId });
-  if (user?.status !== "pending") return;
+  //const user = await User.findOne({ telegramId });
+  //if (user?.status !== "pending") return;
   await sendTenthMessage(telegramId, telegramFirstName);
 });
 
@@ -110,70 +110,164 @@ const user = bot.chatType("private");
 user.command("start", async (update) => {
   const telegramId = update.from.id;
   const telegramFirstName = update.from.first_name;
+  const queuePosition = 22
 
-  const user = await User.findOne({ telegramId });
-  if (!user)
-    await User.create({
-      name: update.from.first_name,
-      telegramId,
-      status: "pending",
-    });
+  //const user = await User.findOne({ telegramId });
+  //if (!user)
+    //await User.create({
+      //name: update.from.first_name,
+      //telegramId,
+      //status: "pending",
+    //});
 
-  if (user?.status === "done") return;
+  //if (user?.status === "done") return;
 
   await sendStartMessage(update);
 
   await agenda.schedule("in 10 minutes", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition
   });
-  await agenda.schedule("in 3 hours", "Send Third Message", {
+
+  await agenda.schedule("in 5 hours", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition: queuePosition-1
   });
-  await agenda.schedule("in 6 hours", "Send Fourth Message", {
+  await agenda.schedule("in 10 hours", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition: queuePosition-2
   });
-  await agenda.schedule("in 9 hours", "Send Fifth Message", {
+  await agenda.schedule("in 15 hours", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition: queuePosition-3
   });
-  await agenda.schedule("in 12 hours", "Send Sixth Message", {
+  await agenda.schedule("in 20 hours", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition: queuePosition-4
   });
-  await agenda.schedule("in 15 hours", "Send Seventh Message", {
+  await agenda.schedule("in 25 hours", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition: queuePosition-5
   });
-  await agenda.schedule("in 18 hours", "Send Eighth Message", {
+  await agenda.schedule("in 30 hours", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition: queuePosition-6
   });
-  await agenda.schedule("in 21 hours", "Send Nineth Message", {
+  await agenda.schedule("in 35 hours", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition: queuePosition-7
   });
-  await agenda.schedule("in 24 hours", "Send Tenth Message", {
+  await agenda.schedule("in 40 hours", "Send Second Message", {
     telegramId,
     telegramFirstName,
+    queuePosition: queuePosition-8
   });
+  await agenda.schedule("in 45 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-9
+  });
+  await agenda.schedule("in 50 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-10
+  });
+  await agenda.schedule("in 55 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-11
+  });
+  await agenda.schedule("in 60 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-12
+  });
+  await agenda.schedule("in 65 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-13
+  });
+  await agenda.schedule("in 70 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-14
+  });
+  await agenda.schedule("in 75 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-15
+  });
+  await agenda.schedule("in 80 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-16
+  });
+  await agenda.schedule("in 85 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-17
+  });
+  await agenda.schedule("in 90 hours", "Send Second Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition-18
+  });
+
+  //await agenda.schedule("in 5 hours", "Send Third Message", {
+    //   telegramId,
+    //   telegramFirstName,
+    // });
+    // await agenda.schedule("in 10 hours", "Send Fourth Message", {
+    //   telegramId,
+    //   telegramFirstName,
+    // });
+    // await agenda.schedule("in 15 hours", "Send Fifth Message", {
+    //   telegramId,
+    //   telegramFirstName,
+    // });
+    // await agenda.schedule("in 20 hours", "Send Sixth Message", {
+    //   telegramId,
+    //   telegramFirstName,
+    // });
+    // await agenda.schedule("in 25 hours", "Send Seventh Message", {
+    //   telegramId,
+    //   telegramFirstName,
+    // });
+    // await agenda.schedule("in 30 hours", "Send Eighth Message", {
+    //   telegramId,
+    //   telegramFirstName,
+    // });
+    // await agenda.schedule("in 35 hours", "Send Nineth Message", {
+    //   telegramId,
+    //   telegramFirstName,
+    // });
+    // await agenda.schedule("in 40 hours", "Send Tenth Message", {
+    //   telegramId,
+    //   telegramFirstName,
+    // });
 });
 
 async function sendStartMessage(update) {
   const message = introMessage(update.from.first_name);
 
   const chatId = update.chat.id;
-  await bot.api.sendVideo(
-    chatId,
-    'BAACAgEAAxkBAAEENFVmFhnIzJXwDEhEC2BP5S8k_ARO5QACMgQAAsyZsUR0piNsi6-oJjQE'
-  );
+  //await bot.api.sendVideo(
+    //chatId,
+    //'BAACAgEAAxkBAAEENFVmFhnIzJXwDEhEC2BP5S8k_ARO5QACMgQAAsyZsUR0piNsi6-oJjQE'
+  //);
 
   await bot.api.sendMessage(chatId, message.text, {
     reply_markup: new InlineKeyboard().url(
-      "Quero entrar no grupo AGORA!",
-      "https://t.me/+aQSAAQ05iUplNjNh"
+      "QUERO ENTRAR NO GRUPO VIP!",
+      "https://t.me/+zqDKJPLAEw03Nzhh"
     ),
     entities: message.entities,
   });
@@ -181,197 +275,197 @@ async function sendStartMessage(update) {
 
 async function sendSecondMessage(
   telegramId: number,
-  telegramFirstName: string
+  telegramFirstName: string,
+  position: int
 ) {
-  const reply = secondMessage(telegramFirstName);
-
-  await bot.api.sendPhoto(
-    telegramId,
-    new InputFile("./src/assets/images/image-2.jpeg")
-  );
+  const reply = secondMessage(telegramFirstName, position);
+  //await bot.api.sendPhoto(
+    //telegramId,
+    //new InputFile("./src/assets/images/image-2.jpeg")
+  //);
   await bot.api.sendMessage(telegramId, reply.text, {
     reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+      .url("QUERO AQUECER MINHA CONTA AGORA!", "https://youtu.be/StJ_3NXtLwQ")
       .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
     entities: reply.entities,
   });
 }
 
-async function sendThirdMessage(telegramId, telegramFirstName) {
-  const reply = thirdMessage(telegramFirstName);
+// async function sendThirdMessage(telegramId, telegramFirstName) {
+//   const reply = thirdMessage(telegramFirstName);
 
-  await bot.api.sendVideo(
-    telegramId,
-    new InputFile("./src/assets/videos/video-3.mp4")
-  );
-  await bot.api.sendMessage(telegramId, reply.text, {
-    reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
-      .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-    entities: reply.entities,
-  });
-}
+//   await bot.api.sendVideo(
+//     telegramId,
+//     new InputFile("./src/assets/videos/video-3.mp4")
+//   );
+//   await bot.api.sendMessage(telegramId, reply.text, {
+//     reply_markup: new InlineKeyboard()
+//       .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+//       .row()
+//       .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//     entities: reply.entities,
+//   });
+// }
 
-async function sendFourthMessage(telegramId, telegramFirstName) {
-  const reply = fourthMessage(telegramFirstName);
+// async function sendFourthMessage(telegramId, telegramFirstName) {
+//   const reply = fourthMessage(telegramFirstName);
 
-  await bot.api.sendPhoto(
-    telegramId,
-    new InputFile("./src/assets/images/image-4.jpeg")
-  );
-  await bot.api.sendMessage(telegramId, reply.text, {
-    reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
-      .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-    entities: reply.entities,
-  });
-}
+//   await bot.api.sendPhoto(
+//     telegramId,
+//     new InputFile("./src/assets/images/image-4.jpeg")
+//   );
+//   await bot.api.sendMessage(telegramId, reply.text, {
+//     reply_markup: new InlineKeyboard()
+//       .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+//       .row()
+//       .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//     entities: reply.entities,
+//   });
+// }
 
-async function sendFithMessage(telegramId, telegramFirstName) {
-  const reply = fifthMessage(telegramFirstName);
+// async function sendFithMessage(telegramId, telegramFirstName) {
+//   const reply = fifthMessage(telegramFirstName);
 
-  await bot.api.sendVideo(
-    telegramId,
-    new InputFile("./src/assets/videos/video-5.mp4")
-  );
-  await bot.api.sendMessage(telegramId, reply.text, {
-    reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
-      .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-    entities: reply.entities,
-  });
-}
+//   await bot.api.sendVideo(
+//     telegramId,
+//     new InputFile("./src/assets/videos/video-5.mp4")
+//   );
+//   await bot.api.sendMessage(telegramId, reply.text, {
+//     reply_markup: new InlineKeyboard()
+//       .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+//       .row()
+//       .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//     entities: reply.entities,
+//   });
+// }
 
-async function sendSixthMessage(telegramId, telegramFirstName) {
-  const reply = sixthMessage(telegramFirstName);
+// async function sendSixthMessage(telegramId, telegramFirstName) {
+//   const reply = sixthMessage(telegramFirstName);
 
-  await bot.api.sendPhoto(
-    telegramId,
-    new InputFile("./src/assets/images/image-6.jpeg")
-  );
-  await bot.api.sendMessage(telegramId, reply.text, {
-    reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
-      .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-    entities: reply.entities,
-  });
-}
+//   await bot.api.sendPhoto(
+//     telegramId,
+//     new InputFile("./src/assets/images/image-6.jpeg")
+//   );
+//   await bot.api.sendMessage(telegramId, reply.text, {
+//     reply_markup: new InlineKeyboard()
+//       .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+//       .row()
+//       .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//     entities: reply.entities,
+//   });
+// }
 
-async function sendSeventhMessage(telegramId, telegramFirstName) {
-  const reply = seventhMessage(telegramFirstName);
+// async function sendSeventhMessage(telegramId, telegramFirstName) {
+//   const reply = seventhMessage(telegramFirstName);
 
-  await bot.api.sendPhoto(
-    telegramId,
-    new InputFile("./src/assets/images/image-7.jpeg")
-  );
-  await bot.api.sendMessage(telegramId, reply.text, {
-    reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
-      .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-    entities: reply.entities,
-  });
-}
+//   await bot.api.sendPhoto(
+//     telegramId,
+//     new InputFile("./src/assets/images/image-7.jpeg")
+//   );
+//   await bot.api.sendMessage(telegramId, reply.text, {
+//     reply_markup: new InlineKeyboard()
+//       .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+//       .row()
+//       .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//     entities: reply.entities,
+//   });
+// }
 
-async function sendEighthMessage(telegramId, telegramFirstName) {
-  const reply = eightMessage(telegramFirstName);
+// async function sendEighthMessage(telegramId, telegramFirstName) {
+//   const reply = eightMessage(telegramFirstName);
 
-  await bot.api.sendVideo(
-    telegramId,
-    new InputFile("./src/assets/videos/video-8.mp4")
-  );
-  await bot.api.sendMessage(telegramId, reply.text, {
-    reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
-      .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-    entities: reply.entities,
-  });
-}
+//   await bot.api.sendVideo(
+//     telegramId,
+//     new InputFile("./src/assets/videos/video-8.mp4")
+//   );
+//   await bot.api.sendMessage(telegramId, reply.text, {
+//     reply_markup: new InlineKeyboard()
+//       .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+//       .row()
+//       .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//     entities: reply.entities,
+//   });
+// }
 
-async function sendNinethMessage(telegramId, telegramFirstName) {
-  const reply = ninethMessage(telegramFirstName);
+// async function sendNinethMessage(telegramId, telegramFirstName) {
+//   const reply = ninethMessage(telegramFirstName);
 
-  await bot.api.sendPhoto(
-    telegramId,
-    new InputFile("./src/assets/images/image-9.jpeg")
-  );
-  await bot.api.sendMessage(telegramId, reply.text, {
-    reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
-      .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-    entities: reply.entities,
-  });
-}
+//   await bot.api.sendPhoto(
+//     telegramId,
+//     new InputFile("./src/assets/images/image-9.jpeg")
+//   );
+//   await bot.api.sendMessage(telegramId, reply.text, {
+//     reply_markup: new InlineKeyboard()
+//       .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+//       .row()
+//       .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//     entities: reply.entities,
+//   });
+// }
 
-async function sendTenthMessage(telegramId, telegramFirstName) {
-  const reply = tenthMessage(telegramFirstName);
+// async function sendTenthMessage(telegramId, telegramFirstName) {
+//   const reply = tenthMessage(telegramFirstName);
 
-  await bot.api.sendVideo(
-    telegramId,
-    new InputFile("./src/assets/videos/video-10.mp4")
-  );
-  await bot.api.sendMessage(telegramId, reply.text, {
-    reply_markup: new InlineKeyboard()
-      .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
-      .row()
-      .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-    entities: reply.entities,
-  });
-}
+//   await bot.api.sendVideo(
+//     telegramId,
+//     new InputFile("./src/assets/videos/video-10.mp4")
+//   );
+//   await bot.api.sendMessage(telegramId, reply.text, {
+//     reply_markup: new InlineKeyboard()
+//       .url("Vou fazer o passo a passo AGORA!", "https://t.me/+aQSAAQ05iUplNjNh")
+//       .row()
+//       .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//     entities: reply.entities,
+//   });
+// }
 
-async function sendScheduledEverydayMessage(allPendingUsers, response, job) {
-  for (const user of allPendingUsers) {
-    try {
-      await job.touch();
-      await bot.api.sendMessage(user?.telegramId, response?.text, {
-        reply_markup: new InlineKeyboard()
-          .url(
-            "Quero participar da live AGORA!",
-            "https://t.me/+aQSAAQ05iUplNjNh"
-          )
-          .row()
-          .text("Eu JÁ FIZ o passo a passo todo!", "win"),
-        entities: response.entities,
-      });
-    } catch (error) {
-      // checks for 403 errors in case user blocked the bot or deleted telegram account
-      if (error.message.includes('403')) {
-        await User.updateOne(
-          { telegramId: user?.telegramId },
-          { status: "blocked" }
-        );
-      } else {
-        console.error("Everyday Message Error ", error.message);
-      }
-    }
-  }
-}
+// async function sendScheduledEverydayMessage(allPendingUsers, response, job) {
+//   for (const user of allPendingUsers) {
+//     try {
+//       await job.touch();
+//       await bot.api.sendMessage(user?.telegramId, response?.text, {
+//         reply_markup: new InlineKeyboard()
+//           .url(
+//             "Quero participar da live AGORA!",
+//             "https://t.me/+aQSAAQ05iUplNjNh"
+//           )
+//           .row()
+//           .text("Eu JÁ FIZ o passo a passo todo!", "win"),
+//         entities: response.entities,
+//       });
+//     } catch (error) {
+//       // checks for 403 errors in case user blocked the bot or deleted telegram account
+//       if (error.message.includes('403')) {
+//         await User.updateOne(
+//           { telegramId: user?.telegramId },
+//           { status: "blocked" }
+//         );
+//       } else {
+//         console.error("Everyday Message Error ", error.message);
+//       }
+//     }
+//   }
+// }
 
-user.on("callback_query", async (query) => {
-  try {
-    const chatId = query.chat.id;
-    const userId = query.from.id;
-    const option = query.callbackQuery.data;
+
+//user.on("callback_query", async (query) => {
+  //try {
+    //const chatId = query.chat.id;
+    //const userId = query.from.id;
+    //const option = query.callbackQuery.data;
 
     // Handle the user's response
-    if (option === "win") {
-      const reply = congrats(query.from.first_name);
-      await bot.api.sendMessage(chatId, reply.text, {
-        entities: reply.entities,
-      });
-      await User.updateOne({ telegramId: userId }, { status: "done" });
-    }
-  } catch (error) {
-    console.error(error);
-  }
-});
+    //if (option === "win") {
+      //const reply = congrats(query.from.first_name);
+      //await bot.api.sendMessage(chatId, reply.text, {
+        //entities: reply.entities,
+      //});
+      //await User.updateOne({ telegramId: userId }, { status: "done" });
+    //}
+  //} catch (error) {
+    //console.error(error);
+  //}
+//});
 
 bot.catch((err) => {
   const ctx = err.ctx;

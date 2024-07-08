@@ -1,23 +1,15 @@
 import { bold, fmt } from "@grammyjs/parse-mode";
 
 const introMessage = (name: string) => fmt`
-👋🏻 ${name}, muito prazer… 
+🏆 ${name}, PARABÉNS, você conseguiu! Leia com atenção: 
 
-🚨${bold(
-  "Como te disse no vídeo acima"
-)}, você só precisa seguir um simples passo a passo para ganhar tudo isso: 
+✅ ${bold("Você já está na fila de espera para a sua alavancagem privada")}, assim que chegar a sua vez, eu vou te chamar no privado, não será esse robô, EU mesmo te chamarei no privado aqui do Telegram, esse robô serve apenas para ir te avisando em que lugar da fila de espera você está. (É rápido) 
 
-🎁 Vaga grátis no grupo VIP de ${bold(
-  "ALAVANCAGEM DE BANCA SEM GALE"
-)} com 6 sessões ao vivo por dia comigo + ${bold(
-  "AULA"
-)} minha te ensinando tudo sobre o mercado!  
+🚨Enquanto não chega a sua vez, entre no meu grupo VIP, eu faço 3 lives ao vivo de alavancagem por dia lá dentro e você pode usar essas lives para lucrar e aquecer a sua conta também. ${bold("(É obrigatório estar no grupo VIP)")}
 
-🎁 ${bold(
-  "Depósito feito por mim na sua conta da corretora"
-)} (Não é sorteio, é garantido que vou fazer, é só seguir o passo a passo e pronto!)
+💰 ${bold("Lembre-se:")} Quanto mais aquecida a sua conta estiver, maior será o seu lucro na alavancagem privada! 
 
-⬇️ Últimas vagas/horas para você receber tudo isso. ${bold("Clique no botão abaixo")}, entre no grupo, e siga o passo a passo AGORA!
+⬇️ ${bold("Clique no botão abaixo para entrar no grupo VIP")} e leia a mensagem fixada do grupo. ${bold("(Na mensagem fixada tem uma aula ensinando a aquecer a conta)")}
 `;
 
 export default introMessage;
