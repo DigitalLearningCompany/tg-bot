@@ -177,13 +177,13 @@ async function sendStartMessage(update) {
 async function sendSecondMessage(
   telegramId: number,
   telegramFirstName: string,
-  position: int
+  position: number
 ) {
   const reply = secondMessage(telegramFirstName, position);
   await bot.api.sendMessage(telegramId, reply.text, {
     reply_markup: new InlineKeyboard()
       .url("QUERO AQUECER MINHA CONTA AGORA!", "https://youtu.be/StJ_3NXtLwQ")
-      .row()
+      .row(),
     entities: reply.entities,
   });
 }
