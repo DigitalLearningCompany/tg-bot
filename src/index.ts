@@ -42,7 +42,7 @@ const user = bot.chatType("private");
 user.command("start", async (update) => {
   const telegramId = update.from.id;
   const telegramFirstName = update.from.first_name;
-  const queuePosition = 22
+  const queuePosition = 36
 
   await sendStartMessage(update);
 
@@ -52,112 +52,14 @@ user.command("start", async (update) => {
     queuePosition
   });
 
-  await agenda.schedule("in 5 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-1
-  });
-
-  await agenda.schedule("in 10 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-2
-  });
-
-  await agenda.schedule("in 15 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-3
-  });
-
-  await agenda.schedule("in 20 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-4
-  });
-
-  await agenda.schedule("in 25 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-5
-  });
-
-  await agenda.schedule("in 30 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-6
-  });
-
-  await agenda.schedule("in 35 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-7
-  });
-
-  await agenda.schedule("in 40 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-8
-  });
-
-  await agenda.schedule("in 45 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-9
-  });
-
-  await agenda.schedule("in 50 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-10
-  });
-
-  await agenda.schedule("in 55 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-11
-  });
-  await agenda.schedule("in 60 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-12
-  });
-
-  await agenda.schedule("in 65 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-13
-  });
-
-  await agenda.schedule("in 70 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-14
-  });
-
-  await agenda.schedule("in 75 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-15
-  });
-
-  await agenda.schedule("in 80 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-16
-  });
-
-  await agenda.schedule("in 85 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-17
-  });
-
-  await agenda.schedule("in 90 hours", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition: queuePosition-18
-  });
+  for (let i = 1; i<queuePosition; i++) {
+    if(queuePosition-i < 4) return 
+    await agenda.schedule(`in ${i * 5} hours`, "Send Second Message", {
+      telegramId,
+      telegramFirstName,
+      queuePosition: queuePosition-i
+    });
+  }
 });
 
 async function sendStartMessage(update) {
