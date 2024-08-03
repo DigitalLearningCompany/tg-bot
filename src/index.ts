@@ -40,25 +40,32 @@ agenda.start();
 const user = bot.chatType("private");
 
 user.command("start", async (update) => {
-  const telegramId = update.from.id;
-  const telegramFirstName = update.from.first_name;
-  const queuePosition = 36
-
-  await sendStartMessage(update);
-
-  await agenda.schedule("in 10 minutes", "Send Second Message", {
-    telegramId,
-    telegramFirstName,
-    queuePosition
-  });
-
-  for (let i = 1; i<queuePosition; i++) {
-    if(queuePosition-i < 4) return 
-    await agenda.schedule(`in ${i * 5} hours`, "Send Second Message", {
+  try {
+    const telegramId = update.from.id;
+    const telegramFirstName = update.from.first_name;
+    const queuePosition = 36 // arbitrary number choosen by the client
+  
+    await sendStartMessage(update);
+  
+    await agenda.schedule("in 10 minutes", "Send Second Message", {
       telegramId,
       telegramFirstName,
-      queuePosition: queuePosition-i
+      queuePosition
     });
+  
+    for (let i = 1; i<queuePosition; i++) {
+      const newPosition = queuePosition - i
+      if(newPosition >= 4) {
+        await agenda.schedule(`in ${i * 5} hours`, "Send Second Message", {
+          telegramId,
+          telegramFirstName,
+          queuePosition: newPosition
+        });
+      }
+    }
+    
+  } catch (error) {
+    console.error(error)
   }
 });
 
