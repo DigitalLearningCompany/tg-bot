@@ -39,10 +39,10 @@ agenda.define("Send 5h Message", async (job) => {
   if (queuePosition < 4) return;
 
   await sendSecondMessage(telegramId, telegramFirstName, queuePosition);
-  
+
   const newQueuePosition = queuePosition - 1;
 
-  await agenda.schedule("in 4 minutes", "Send 5h Message", {
+  await agenda.schedule("in 5 hours", "Send 5h Message", {
     telegramId,
     telegramFirstName,
     queuePosition: newQueuePosition,
@@ -61,7 +61,7 @@ user.command("start", async (update) => {
 
     await sendStartMessage(update);
 
-    await agenda.schedule("in 2 minutes", "Send Second Message", {
+    await agenda.schedule("in 10 minutes", "Send Second Message", {
       telegramId,
       telegramFirstName,
       queuePosition,
@@ -73,7 +73,7 @@ user.command("start", async (update) => {
     });
 
     if (job.length === 0) {
-      await agenda.schedule("in 4 minutes", "Send 5h Message", {
+      await agenda.schedule("in 5 hours", "Send 5h Message", {
         telegramId,
         telegramFirstName,
         queuePosition: queuePosition - 1,
