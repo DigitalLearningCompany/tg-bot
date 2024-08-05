@@ -36,19 +36,16 @@ agenda.define("Send Second Message", async (job) => {
 agenda.define("Send 5h Message", async (job) => {
   const { telegramId, telegramFirstName, queuePosition } = job.attrs.data;
 
-  if (queuePosition <= 4) {
-    await agenda.cancel({
-      name: "Send 5h Message",
-      "data.telegramId": telegramId,
-    });
-    return;
-  }
+  if (queuePosition < 4) return;
 
   const newQueuePosition = queuePosition - 1;
   await sendSecondMessage(telegramId, telegramFirstName, newQueuePosition);
 
-  job.attrs.data.queuePosition = newQueuePosition;
-  await job.save();
+  await agenda.schedule("in 4 minutes", "Send 5h Message", {
+    telegramId,
+    telegramFirstName,
+    queuePosition: queuePosition - 1,
+  });
 });
 
 agenda.start();
@@ -63,7 +60,7 @@ user.command("start", async (update) => {
 
     await sendStartMessage(update);
 
-    await agenda.schedule("in 10 minutes", "Send Second Message", {
+    await agenda.schedule("in 2 minutes", "Send Second Message", {
       telegramId,
       telegramFirstName,
       queuePosition,
@@ -75,10 +72,10 @@ user.command("start", async (update) => {
     });
 
     if (job.length === 0) {
-      await agenda.every("5 hours", "Send 5h Message", {
+      await agenda.schedule("in 4 minutes", "Send 5h Message", {
         telegramId,
         telegramFirstName,
-        queuePosition,
+        queuePosition: queuePosition - 1,
       });
     }
   } catch (error) {
