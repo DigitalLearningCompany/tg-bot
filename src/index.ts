@@ -28,11 +28,27 @@ const bot = new Bot<ParseModeFlavor<Context>>(TOKEN);
 const agenda = new Agenda({ db: { address: MONGO_URI } });
 bot.use(hydrateReply);
 
-
-
 agenda.define("Send Second Message", async (job) => {
   const { telegramId, telegramFirstName, queuePosition } = job.attrs.data;
   await sendSecondMessage(telegramId, telegramFirstName, queuePosition);
+});
+
+agenda.define("Send 5h Message", async (job) => {
+  const { telegramId, telegramFirstName, queuePosition } = job.attrs.data;
+
+  if (queuePosition <= 4) {
+    await agenda.cancel({
+      name: "Send 5h Message",
+      "data.telegramId": telegramId,
+    });
+    return;
+  }
+
+  const newQueuePosition = queuePosition - 1;
+  await sendSecondMessage(telegramId, telegramFirstName, newQueuePosition);
+
+  job.attrs.data.queuePosition = newQueuePosition;
+  await job.save();
 });
 
 agenda.start();
@@ -43,29 +59,30 @@ user.command("start", async (update) => {
   try {
     const telegramId = update.from.id;
     const telegramFirstName = update.from.first_name;
-    const queuePosition = 36 // arbitrary number choosen by the client
-  
+    const queuePosition = 36; // arbitrary number choosen by the client
+
     await sendStartMessage(update);
-  
+
     await agenda.schedule("in 10 minutes", "Send Second Message", {
       telegramId,
       telegramFirstName,
-      queuePosition
+      queuePosition,
     });
-  
-    for (let i = 1; i<queuePosition; i++) {
-      const newPosition = queuePosition - i
-      if(newPosition >= 4) {
-        await agenda.schedule(`in ${i * 5} hours`, "Send Second Message", {
-          telegramId,
-          telegramFirstName,
-          queuePosition: newPosition
-        });
-      }
+
+    const job = await agenda.jobs({
+      name: "Send 5h Message",
+      "data.telegramId": telegramId,
+    });
+
+    if (job.length === 0) {
+      await agenda.every("5 hours", "Send 5h Message", {
+        telegramId,
+        telegramFirstName,
+        queuePosition,
+      });
     }
-    
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 });
 
