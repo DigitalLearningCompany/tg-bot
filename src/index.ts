@@ -36,7 +36,7 @@ agenda.define("Send Second Message", async (job) => {
 agenda.define("Send 5h Message", async (job) => {
   const { telegramId, telegramFirstName, queuePosition } = job.attrs.data;
 
-  if (queuePosition < 4) return;
+  if (queuePosition < 3) return;
 
   await sendSecondMessage(telegramId, telegramFirstName, queuePosition);
 
