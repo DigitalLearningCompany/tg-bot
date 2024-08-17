@@ -42,7 +42,7 @@ agenda.define("Send 5h Message", async (job) => {
 
   const newQueuePosition = queuePosition - 1;
 
-  await agenda.schedule("in 5 hours", "Send 5h Message", {
+  await agenda.schedule("in 2 minutes", "Send 5h Message", {
     telegramId,
     telegramFirstName,
     queuePosition: newQueuePosition,
@@ -67,18 +67,11 @@ user.command("start", async (update) => {
       queuePosition,
     });
 
-    const job = await agenda.jobs({
-      name: "Send 5h Message",
-      "data.telegramId": telegramId,
+    await agenda.schedule("in 2 minutes", "Send 5h Message", {
+      telegramId,
+      telegramFirstName,
+      queuePosition: queuePosition - 1,
     });
-
-    if (job.length === 0) {
-      await agenda.schedule("in 2 minutes", "Send 5h Message", {
-        telegramId,
-        telegramFirstName,
-        queuePosition: queuePosition - 1,
-      });
-    }
   } catch (error) {
     console.error(error);
   }
