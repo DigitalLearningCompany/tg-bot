@@ -99,7 +99,7 @@ async function sendSecondMessage(
   const reply = secondMessage(telegramFirstName, position);
   await bot.api.sendMessage(telegramId, reply.text, {
     reply_markup: new InlineKeyboard()
-      .url("QUERO AQUECER MINHA CONTA AGORA!", "https://youtu.be/StJ_3NXtLwQ")
+      .url("QUERO AQUECER MINHA CONTA AGORA!", "https://youtu.be/4LmdK6gFsxw")
       .row(),
     entities: reply.entities,
   });
